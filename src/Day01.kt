@@ -1,21 +1,18 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        var cnt = 0
-        (1 until input.size).forEach {
-            if (input[it].toInt() - input[it - 1].toInt() > 0) cnt++
-        }
-        return cnt
+    fun part1(input: List<Int>): Int {
+        return input
+            .windowed(2)
+            .count { (a, b) -> b > a }
     }
 
-    fun part2(input: List<String>): Int {
-        var cnt = 0
-        (3 until input.size).forEach {
-            if (input[it].toInt() > input[it - 3].toInt()) cnt++
-        }
-        return cnt
+    fun part2(input: List<Int>): Int {
+        return input
+            .windowed(3) { it.sum() }
+            .windowed(2)
+            .count { (a, b) -> b > a }
     }
 
-    val input = readInput("Day01")
+    val input = readInput("Day01").map { it.toInt() }
     println(part1(input))
     println(part2(input))
 }
